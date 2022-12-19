@@ -158,9 +158,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resourses\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="logo-full.png" />
   </ItemGroup>

@@ -32,15 +32,39 @@ namespace ekzam.Pages
 
         private void Add_click(object sender, RoutedEventArgs e)
         {
-           
+            Manager.MyFrame.Navigate(new AddPage(null));
         }
         private void Delete_click(object sender, RoutedEventArgs e)
         {
-           
+            var TaskForRemoving = DGrid.SelectedItems.Cast<AppData.Task>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить следущие {TaskForRemoving.Count()} элементов?", "Внимание",
+               MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Ekzam_zhurEntities.GetContext().Task.RemoveRange(TaskForRemoving);
+                    Ekzam_zhurEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены!");
+                    DGrid.ItemsSource =Ekzam_zhurEntities.GetContext().Task.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
         private void Edit_click(object sender, RoutedEventArgs e)
         {
-            Manager.MainFrame.Navigate(new AddPage((sender as Button).DataContext as AppData.Task));
+            Manager.MyFrame.Navigate(new AddPage((sender as Button).DataContext as AppData.Task));
+        }
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+              Ekzam_zhurEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DGrid.ItemsSource = Ekzam_zhurEntities.GetContext().Task.ToList();
+            }
         }
     }
 }

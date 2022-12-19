@@ -35,6 +35,20 @@ namespace ekzam
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+          MyFrame.Content = new MainWindow();
+        }
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            if (MyFrame.CanGoBack)
+            {
+                btnBack.Visibility = Visibility.Visible;
+
+            }
+
+            else
+            {
+                btnBack.Visibility = Visibility.Hidden;
+            }
 
         }
     }

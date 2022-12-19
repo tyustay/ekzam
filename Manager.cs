@@ -9,6 +9,6 @@ namespace ekzam
 {
     internal class Manager
     {
-        public static Frame MainFrame { get; set; }
+        public static Frame MyFrame { get; set; }
     }
 }
