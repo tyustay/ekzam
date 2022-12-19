@@ -14,26 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ekzam
+namespace ekzam.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AddPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddPage : Page
     {
-        public static Frame MainFrame;
-        public MainWindow()
+        private AppData.Task _currentTask = new AppData.Task();
+        public AddPage(AppData.Task selectedorder)
         {
             InitializeComponent();
+            if (selectedorder != null)
+                _currentTask = selectedorder;
+            DataContext = _currentTask;
             ConnectOdb.conObj = new Ekzam_zhurEntities();
-            FrameObj.FrameMain = MyFrame;
         }
-        private void Task_click(object sender, RoutedEventArgs e)
-        {
-           MyFrame.Content = new Pages.TaskPage();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
 
         }

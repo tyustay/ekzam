@@ -25,8 +25,11 @@ namespace ekzam.Pages
         {
             InitializeComponent();
             var currentTask = ConnectOdb.conObj.Task.ToList();
-            DGridOrder.ItemsSource = currentTask;
+            DGrid.ItemsSource = currentTask;
         }
+
+      
+
         private void Add_click(object sender, RoutedEventArgs e)
         {
            
@@ -37,7 +40,7 @@ namespace ekzam.Pages
         }
         private void Edit_click(object sender, RoutedEventArgs e)
         {
-            
+            Manager.MainFrame.Navigate(new AddPage((sender as Button).DataContext as AppData.Task));
         }
     }
 }
